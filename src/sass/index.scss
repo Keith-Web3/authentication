@@ -1,0 +1,9 @@
+@use './resets';
+
+#root {
+  font-family: 'Noto Sans';
+  background-color: #252329;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+}
