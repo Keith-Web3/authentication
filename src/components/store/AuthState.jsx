@@ -13,7 +13,11 @@ import {
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { isLoggedIn: false, errorMessage: '', user: null },
+  initialState: {
+    isLoggedIn: false,
+    errorMessage: 'incorrect password',
+    user: null,
+  },
   reducers: {
     submit(state, { payload: { user, error } }) {
       console.log(state.isLoggedIn)
