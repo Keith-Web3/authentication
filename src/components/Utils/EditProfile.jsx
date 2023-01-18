@@ -22,11 +22,9 @@ function EditProfile() {
   const dispatch = useDispatch()
   const [dbData, setdbData] = useState({})
   const [isLoading, setIsLoading] = useState(false)
-  const submitRef = useRef()
 
   const collectionRef = collection(database, 'profiles')
 
-  submitRef.current.disabled = isLoading
   useEffect(() => {
     getDocs(collectionRef).then(res => {
       res.docs.forEach(doc => {
@@ -84,6 +82,8 @@ function EditProfile() {
     e.preventDefault()
 
     try {
+      if (isLoading === true)
+        throw new Error('Please wait, previous request processing...')
       setIsLoading(true)
       const res = await updateProfile(auth.currentUser, {
         displayName: nameRef.current.value || data.displayName,
@@ -139,7 +139,7 @@ function EditProfile() {
         {inputData.map(el => (
           <EditInput {...el} key={nanoid()} />
         ))}
-        <Button ref={submitRef}>Save</Button>
+        <Button>Save</Button>
       </form>
     </div>
   )
