@@ -15,7 +15,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     isLoggedIn: false,
-    errorMessage: 'incorrect password',
+    errorMessage: '',
     user: null,
   },
   reducers: {

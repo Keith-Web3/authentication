@@ -98,7 +98,7 @@ function EditProfile() {
         passwordRef.current.value || data.password
       )
       dispatch(
-        actions.resetErrorMessage('Your profile has been successful updated!')
+        actions.resetErrorMessage('Your profile has been successfully updated!')
       )
     } catch (err) {
       dispatch(actions.resetErrorMessage(err.message))
