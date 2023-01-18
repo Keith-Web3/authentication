@@ -2,6 +2,9 @@
   background-color: #fafafb;
   width: 100%;
   height: 100%;
+  @media (min-width: 610px) {
+    padding: 1em;
+  }
 
   .container {
     color: #000;
@@ -21,35 +24,102 @@
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 1em;
       margin-bottom: 1em;
       padding: 1em 1em 0;
+
+      img:nth-of-type(2) {
+        margin-left: auto;
+      }
+      @media (min-width: 610px) {
+        padding: 0;
+      }
     }
     h1,
     h1 + p {
       text-align: center;
       padding-inline: 1em;
+      @media (min-width: 610px) {
+        padding: 0;
+      }
+    }
+    .table-head {
+      padding: 1em;
+      margin-top: 1em;
+      display: grid;
+      grid-template: repeat(2, auto) / repeat(2, auto);
+      grid-template-areas: 'profile button' 'text button';
+      column-gap: 1em;
+      align-items: center;
+
+      @media (min-width: 610px) {
+        border: 1px solid #e0e0e0;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom: none;
+      }
+
+      h2 {
+        grid-area: profile;
+      }
+      p {
+        grid-area: text;
+      }
+      button {
+        border: 1px solid #828282;
+        border-radius: 12px;
+        background-color: transparent;
+        letter-spacing: -0.035em;
+        color: #828282;
+        font-weight: 500;
+        display: block;
+        margin-left: auto;
+        grid-area: button;
+      }
     }
     table {
-      margin-top: 1em;
       border-collapse: collapse;
       width: 100%;
 
       tbody {
         tr {
           border: 1px solid #e0e0e0;
+
+          &:last-child {
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+          }
         }
         td {
           padding: 1em;
           font-weight: 500;
+          @media (min-width: 610px) {
+            padding: 1em 2em;
+          }
         }
         td:first-child {
           color: #bdbdbd;
+          @media (max-width: 610px) {
+            width: 117.22px;
+          }
         }
         td:last-child {
+          p {
+            color: #333333;
+            @media (max-width: 610px) {
+              width: calc(100dvw - 117.22px - 1em);
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+          }
           & > * {
             text-align: end;
             margin-left: auto;
+            @media (min-width: 610px) {
+              margin-left: 0;
+              text-align: start;
+            }
           }
         }
       }

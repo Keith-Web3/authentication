@@ -1,0 +1,55 @@
+.edit-profile {
+  padding: 1em;
+  max-width: 760px;
+  margin-inline: auto;
+
+  .form {
+    @media (min-width: 500px) {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 2em;
+    }
+  }
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    width: max-content;
+    margin-bottom: 1em;
+
+    img {
+      width: 1rem;
+    }
+    p {
+      color: #2d9cdb;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+  }
+  .image {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-block: 1.5em;
+
+    img {
+      width: 60px;
+      border-radius: 12px;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+    label {
+      color: #828282;
+      text-transform: uppercase;
+      font-weight: 500;
+
+      input {
+        display: none;
+      }
+    }
+  }
+  button {
+    background-color: #2f80ed;
+    color: #fff;
+  }
+}

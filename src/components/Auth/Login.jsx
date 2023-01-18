@@ -10,7 +10,7 @@ function Login() {
     </div>
   )
   return (
-    <FormTemplate button="Login" footer={footer}>
+    <FormTemplate button="Login" footer={footer} type="LOGIN">
       <h1>Login</h1>
     </FormTemplate>
   )

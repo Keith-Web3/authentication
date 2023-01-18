@@ -12,7 +12,7 @@ function SignUp() {
   )
 
   return (
-    <FormTemplate button="Start coding now" footer={footer}>
+    <FormTemplate button="Start coding now" footer={footer} type="SIGNUP">
       <h1>Join thousands of learners from around the world </h1>
       <p>
         Master web development by making real-life projects. There are multiple
