@@ -51,6 +51,8 @@
       grid-template-areas: 'profile button' 'text button';
       column-gap: 1em;
       align-items: center;
+      max-width: 760px;
+      margin-inline: auto;
 
       @media (min-width: 610px) {
         border: 1px solid #e0e0e0;
@@ -80,6 +82,8 @@
     table {
       border-collapse: collapse;
       width: 100%;
+      max-width: 760px;
+      margin-inline: auto;
 
       tbody {
         tr {

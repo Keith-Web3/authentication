@@ -6,7 +6,7 @@ import { getDocs, collection } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 
 import Button from '../UI/Button'
-import { database } from '../Data/firebase'
+import { auth, database } from '../Data/firebase'
 import ProfileInputs from './ProfileInputs'
 
 function MainProfile() {
@@ -18,7 +18,7 @@ function MainProfile() {
   useEffect(() => {
     getDocs(collectionRef).then(res => {
       res.docs.forEach(doc => {
-        setdbData(doc.data())
+        doc.id === auth.currentUser.uid && setdbData(doc.data())
       })
     })
   }, [])

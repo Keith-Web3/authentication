@@ -1,11 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useId, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage, database } from '../Data/firebase'
-import { doc, setDoc, collection } from 'firebase/firestore'
+import { doc, setDoc, collection, getDocs } from 'firebase/firestore'
 import { updateProfile, updateEmail, updatePassword } from 'firebase/auth'
 import { useSelector, useDispatch } from 'react-redux'
-import { useState, useId } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { auth } from '../Data/firebase'
@@ -21,6 +20,20 @@ function EditProfile() {
   const [profileImg, setProfileImg] = useState(data.photoURL)
   const id = useId()
   const dispatch = useDispatch()
+  const [dbData, setdbData] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
+  const submitRef = useRef()
+
+  const collectionRef = collection(database, 'profiles')
+
+  submitRef.current.disabled = isLoading
+  useEffect(() => {
+    getDocs(collectionRef).then(res => {
+      res.docs.forEach(doc => {
+        doc.id === auth.currentUser.uid && setdbData(doc.data())
+      })
+    })
+  }, [])
 
   const nameRef = useRef()
   const emailRef = useRef()
@@ -71,22 +84,18 @@ function EditProfile() {
     e.preventDefault()
 
     try {
+      setIsLoading(true)
       const res = await updateProfile(auth.currentUser, {
         displayName: nameRef.current.value || data.displayName,
         photoURL: profileImg || data.photoURL,
       })
-      function chooseValid() {
-        const bio = bioRef.current.value.trim()
-          ? { bio: bioRef.current.value }
-          : {}
-        const phone = phoneRef.current.value.trim()
-          ? { phone: phoneRef.current.value }
-          : {}
-        return { ...bio, ...phone }
-      }
+
       const res2 = await setDoc(
         doc(database, 'profiles', auth.currentUser.uid),
-        chooseValid()
+        {
+          bio: bioRef.current.value.trim() || dbData.bio,
+          phone: phoneRef.current.value.trim() || dbData.phone,
+        }
       )
       const res3 = await updateEmail(
         auth.currentUser,
@@ -100,8 +109,9 @@ function EditProfile() {
         actions.resetErrorMessage('Your profile has been successfully updated!')
       )
     } catch (err) {
-      console.log(err)
       dispatch(actions.resetErrorMessage(err.message))
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -129,7 +139,7 @@ function EditProfile() {
         {inputData.map(el => (
           <EditInput {...el} key={nanoid()} />
         ))}
-        <Button>Save</Button>
+        <Button ref={submitRef}>Save</Button>
       </form>
     </div>
   )
