@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid'
 import { useDispatch } from 'react-redux'
 import { submit } from '../store/AuthState'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 import emailImg from '../../assets/envelope-solid.svg'
 import passwordImg from '../../assets/lock-solid.svg'
@@ -37,7 +38,14 @@ function FormTemplate({ children, button, footer, type }) {
     }
   }
   return (
-    <form className="form-template" onSubmit={submitHandler(type)}>
+    <motion.form
+      className="form-template"
+      onSubmit={submitHandler(type)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ type: 'tween', duration: 1 }}
+      exit={{ opacity: 0, x: '-100vw' }}
+    >
       <img src={logo} alt="logo" />
       {children}
       <AuthInput type="email" img={emailImg} ref={emailRef} />
@@ -55,7 +63,7 @@ function FormTemplate({ children, button, footer, type }) {
         ))}
       </div>
       {footer}
-    </form>
+    </motion.form>
   )
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
+import { motion } from 'framer-motion'
 
 import { auth } from './Data/firebase'
 import logo from '../assets/devchallenges.svg'
@@ -13,7 +14,11 @@ function Profile() {
   const navigate = useNavigate()
 
   return (
-    <div className="profile">
+    <motion.div
+      className="profile"
+      transition={{ type: 'tween', duration: 1.5 }}
+      exit={{ opacity: 0, x: '-100vw' }}
+    >
       <div className="container">
         <header>
           <img src={logo} alt="logo" />
@@ -33,7 +38,7 @@ function Profile() {
         </header>
         <Outlet />
       </div>
-    </div>
+    </motion.div>
   )
 }
 
