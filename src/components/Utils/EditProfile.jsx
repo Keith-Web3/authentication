@@ -70,17 +70,16 @@ function EditProfile() {
   const handleProfileChange = async function (e) {
     e.preventDefault()
 
-    // const collectionRef = collection(database, auth.currentUser.uid)
-
     try {
       const res = await updateProfile(auth.currentUser, {
         displayName: nameRef.current.value || data.displayName,
-        bio: bioRef.current.value,
         photoURL: profileImg || data.photoURL,
       })
       function chooseValid() {
-        bio = bioRef.current.value.trim() ? { bio: bioRef.current.value } : {}
-        phone = phoneRef.current.value.trim()
+        const bio = bioRef.current.value.trim()
+          ? { bio: bioRef.current.value }
+          : {}
+        const phone = phoneRef.current.value.trim()
           ? { phone: phoneRef.current.value }
           : {}
         return { ...bio, ...phone }
@@ -101,6 +100,7 @@ function EditProfile() {
         actions.resetErrorMessage('Your profile has been successfully updated!')
       )
     } catch (err) {
+      console.log(err)
       dispatch(actions.resetErrorMessage(err.message))
     }
   }
