@@ -21,7 +21,8 @@ function EditProfile() {
   const id = useId()
   const dispatch = useDispatch()
   const [dbData, setdbData] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
+
+  let isLoading = false
 
   const collectionRef = collection(database, 'profiles')
 
@@ -84,7 +85,7 @@ function EditProfile() {
     try {
       if (isLoading === true)
         throw new Error('Please wait, previous request processing...')
-      setIsLoading(true)
+      isLoading = true
       const res = await updateProfile(auth.currentUser, {
         displayName: nameRef.current.value || data.displayName,
         photoURL: profileImg || data.photoURL,
@@ -111,7 +112,7 @@ function EditProfile() {
     } catch (err) {
       dispatch(actions.resetErrorMessage(err.message))
     } finally {
-      setIsLoading(false)
+      isLoading = false
     }
   }
 
