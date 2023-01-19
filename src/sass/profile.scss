@@ -31,6 +31,20 @@
       img:nth-of-type(2) {
         margin-left: auto;
       }
+      .settings {
+        display: flex;
+        gap: 0.5em;
+        cursor: pointer;
+
+        img {
+          width: 20px;
+        }
+        p {
+          font-weight: 500;
+          text-transform: uppercase;
+          color: #282051;
+        }
+      }
       @media (min-width: 610px) {
         padding: 0;
       }

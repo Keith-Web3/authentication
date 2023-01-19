@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { auth } from './Data/firebase'
 import logo from '../assets/devchallenges.svg'
 import '../sass/profile.scss'
+import settings from '../assets/gear-solid.svg'
 import Button from './UI/Button'
 
 function Profile() {
@@ -27,14 +28,10 @@ function Profile() {
             src={data.photoURL}
             alt="profile image"
           />
-          <Button
-            onClick={() => {
-              signOut(auth)
-              navigate('/login')
-            }}
-          >
-            Logout
-          </Button>
+          <div className="settings">
+            <img src={settings} alt="settings" />
+            <p>settings</p>
+          </div>
         </header>
         <Outlet />
       </div>

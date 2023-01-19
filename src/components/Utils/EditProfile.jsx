@@ -90,14 +90,18 @@ function EditProfile() {
         displayName: nameRef.current.value || data.displayName,
         photoURL: profileImg || data.photoURL,
       })
-
+      console.log({
+        bio: bioRef.current.value.trim() || dbData.bio || '',
+        phone: phoneRef.current.value.trim() || dbData.phone || '',
+      })
       const res2 = await setDoc(
         doc(database, 'profiles', auth.currentUser.uid),
         {
-          bio: bioRef.current.value.trim() || dbData.bio,
-          phone: phoneRef.current.value.trim() || dbData.phone,
+          bio: bioRef.current.value.trim() || dbData.bio || '',
+          phone: phoneRef.current.value.trim() || dbData.phone || '',
         }
       )
+
       const res3 = await updateEmail(
         auth.currentUser,
         emailRef.current.value || data.email
