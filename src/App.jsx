@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
-import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 
 import { actions } from './components/store/AuthState'
 import Login from './components/Auth/Login'
@@ -14,6 +14,7 @@ import EditProfile from './components/Utils/EditProfile'
 import MainProfile from './components/Utils/MainProfile'
 import './sass/index.scss'
 import { auth } from './components/Data/firebase'
+import Settings from './components/Settings'
 let timer
 
 function App() {
@@ -43,16 +44,19 @@ function App() {
     <AnimatePresence>
       {errMessage && <Popup key={nanoid()} message={errMessage} />}
       <Routes>
-        <Route path="/" element={<Navigate to="/profile" />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        {isLoggedIn && (
-          <Route path="/profile" element={<Profile />}>
-            <Route path="/profile" element={<MainProfile />} />
-            <Route path="/profile/edit" element={<EditProfile />} />
-          </Route>
-        )}
-        <Route path="*" element={<Navigate to="/signup" />} />
+          <Route path="/" element={<Navigate to="/profile" />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          {isLoggedIn && (
+            <>
+              <Route path="/profile" element={<Profile />}>
+                <Route path="/profile" element={<MainProfile />} />
+                <Route path="/profile/edit" element={<EditProfile />} />
+              </Route>
+              <Route path="/settings" element={<Settings />} />
+            </>
+          )}
+          <Route path="*" element={<Navigate to="/signup" />} />
       </Routes>
     </AnimatePresence>
   )

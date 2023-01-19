@@ -1,14 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { signOut } from 'firebase/auth'
 import { motion } from 'framer-motion'
 
-import { auth } from './Data/firebase'
 import logo from '../assets/devchallenges.svg'
+import user from '../assets/user-solid.svg'
 import '../sass/profile.scss'
 import settings from '../assets/gear-solid.svg'
-import Button from './UI/Button'
 
 function Profile() {
   const data = useSelector(({ user }) => JSON.parse(user))
@@ -25,10 +23,10 @@ function Profile() {
           <img src={logo} alt="logo" />
           <img
             className="profileimg profileimg--small"
-            src={data.photoURL}
+            src={data.photoURL || user}
             alt="profile image"
           />
-          <div className="settings">
+          <div className="settings" onClick={() => navigate('/settings')}>
             <img src={settings} alt="settings" />
             <p>settings</p>
           </div>

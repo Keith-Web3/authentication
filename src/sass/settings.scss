@@ -1,0 +1,46 @@
+.settings {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  position: relative;
+
+  .container {
+    border: 1px solid #bdbdbd;
+    border-radius: 12px;
+    padding: 1.5em;
+    width: max-content;
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+
+    p {
+      text-transform: capitalize;
+      font-weight: 700;
+      margin-bottom: 1em;
+      text-align: center;
+      color: #e0e0e0;
+    }
+    .social-profiles {
+      display: flex;
+      gap: 1em;
+      justify-content: space-between;
+    }
+    .button-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1em;
+      margin-top: 2.5em;
+
+      button:first-child {
+        background-color: transparent;
+        border: 2px solid red;
+        color: red;
+      }
+      button:last-child {
+        background-color: #2f80ed;
+        color: #fff;
+      }
+    }
+  }
+}

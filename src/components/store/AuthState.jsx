@@ -20,7 +20,6 @@ const authSlice = createSlice({
   },
   reducers: {
     submit(state, { payload: { user, error } }) {
-      console.log(state.isLoggedIn)
       if (user) {
         state.isLoggedIn = true
         state.user = JSON.stringify(user)

@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { auth } from '../Data/firebase'
 import { actions } from '../store/AuthState'
 import backImg from '../../assets/chevron-left-solid.svg'
+import userIcon from '../../assets/user-solid.svg'
 import EditInput from '../UI/EditInput'
 import '../../sass/Utils/edit-profile.scss'
 import Button from '../UI/Button'
@@ -17,7 +18,7 @@ import Button from '../UI/Button'
 function EditProfile() {
   const navigate = useNavigate()
   const data = useSelector(({ user }) => JSON.parse(user))
-  const [profileImg, setProfileImg] = useState(data.photoURL)
+  const [profileImg, setProfileImg] = useState(data.photoURL || userIcon)
   const id = useId()
   const dispatch = useDispatch()
   const [dbData, setdbData] = useState({})
@@ -90,10 +91,6 @@ function EditProfile() {
         displayName: nameRef.current.value || data.displayName,
         photoURL: profileImg || data.photoURL,
       })
-      console.log({
-        bio: bioRef.current.value.trim() || dbData.bio || '',
-        phone: phoneRef.current.value.trim() || dbData.phone || '',
-      })
       const res2 = await setDoc(
         doc(database, 'profiles', auth.currentUser.uid),
         {
@@ -101,7 +98,6 @@ function EditProfile() {
           phone: phoneRef.current.value.trim() || dbData.phone || '',
         }
       )
-
       const res3 = await updateEmail(
         auth.currentUser,
         emailRef.current.value || data.email
