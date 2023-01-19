@@ -1,5 +1,8 @@
 @use './resets';
 
+body {
+  scroll-behavior: smooth;
+}
 #root {
   font-family: 'Noto Sans';
   background-color: #252329;

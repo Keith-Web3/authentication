@@ -29,6 +29,7 @@ const authSlice = createSlice({
     },
 
     resetErrorMessage(state, action) {
+      window.scrollTo(0, 0)
       state.errorMessage = action.payload
     },
   },
