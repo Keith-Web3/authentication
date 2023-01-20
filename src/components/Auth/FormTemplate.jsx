@@ -21,12 +21,6 @@ function FormTemplate({ children, button, footer, type }) {
   const submitHandler = function (type) {
     return function (e) {
       e.preventDefault()
-      if (type === 'TWITTER') {
-        dispatch(
-          actions.resetErrorMessage('Twitter auth is currently disabled')
-        )
-        return
-      }
 
       dispatch(
         submit({

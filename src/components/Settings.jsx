@@ -13,9 +13,11 @@ import {
   storage,
   googleProvider,
   githubProvider,
+  twitterProvider,
   facebookProvider,
 } from './Data/firebase'
 import logo from '../assets/devchallenges-light.svg'
+import backImg from '../assets/chevron-left-solid.svg'
 import SocialProfiles from './Utils/SocialProfiles'
 import Button from './UI/Button'
 import Modal from './UI/Modal'
@@ -44,12 +46,6 @@ function Settings() {
 
   const linkAccount = provider => {
     return async function () {
-      if (!provider) {
-        dispatch(
-          actions.resetErrorMessage('Twitter auth is currently disabled')
-        )
-        return
-      }
       try {
         const res = await linkWithPopup(auth.currentUser, provider)
         dispatch(actions.resetErrorMessage('Account linked sucessfully!'))
@@ -62,11 +58,20 @@ function Settings() {
   return (
     <div className="settings">
       <img src={logo} alt="logo" />
+      <div className="back-btn" onClick={() => navigate(-1)}>
+        <img src={backImg} alt="back" />
+        <p>Back</p>
+      </div>
       <div className="container">
         <p>Connect multiple providers</p>
         <SocialProfiles
           eventListener={linkAccount}
-          keys={[googleProvider, facebookProvider, null, githubProvider]}
+          keys={[
+            googleProvider,
+            facebookProvider,
+            twitterProvider,
+            githubProvider,
+          ]}
         />
         <div className="button-container">
           <Button onClick={() => setShowModal(true)}>Delete account</Button>
@@ -90,6 +95,5 @@ function Settings() {
     </div>
   )
 }
-;['GOOGLE', 'FACEBOOK', 'TWITTER', 'GITHUB']
 
 export default Settings

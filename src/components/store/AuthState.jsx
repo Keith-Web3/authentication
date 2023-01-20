@@ -9,6 +9,7 @@ import {
   googleProvider,
   facebookProvider,
   githubProvider,
+  twitterProvider,
 } from '../Data/firebase'
 
 const authSlice = createSlice({
@@ -59,9 +60,14 @@ export const submit = function ({ type, email, password, navigate }) {
           break
         case 'FACEBOOK':
           userCredentials = await signInWithPopup(auth, facebookProvider)
+          console.log(userCredentials)
           break
         case 'GITHUB':
-          userCredentials = await signInWithPopup(auth, githubProvider)
+          userCredentials = await signInWithPopup(auth, twitterProvider)
+          break
+        case 'TWITTER':
+          userCredentials = await signInWithPopup(auth, twitterProvider)
+          break
         default:
           break
       }

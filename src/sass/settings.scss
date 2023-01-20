@@ -4,6 +4,26 @@
   padding: 1em;
   position: relative;
 
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    width: max-content;
+    margin-bottom: 1em;
+    cursor: pointer;
+    position: absolute;
+    inset: 1em 1em auto auto;
+
+    img {
+      width: 1rem;
+    }
+    p {
+      color: #2d9cdb;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+  }
+
   .container {
     border: 1px solid #bdbdbd;
     border-radius: 12px;
