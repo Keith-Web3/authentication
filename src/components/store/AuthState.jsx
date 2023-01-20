@@ -18,6 +18,7 @@ const authSlice = createSlice({
     isLoggedIn: false,
     errorMessage: '',
     user: null,
+    isLoading: false,
   },
   reducers: {
     submit(state, { payload: { user, error } }) {
@@ -28,7 +29,9 @@ const authSlice = createSlice({
         state.errorMessage = error
       }
     },
-
+    setLoading(state, action) {
+      state.isLoading = action.payload.isLoading
+    },
     resetErrorMessage(state, action) {
       window.scrollTo(0, 0)
       state.errorMessage = action.payload
@@ -36,9 +39,18 @@ const authSlice = createSlice({
   },
 })
 
-export const submit = function ({ type, email, password, navigate }) {
+export const submit = function ({
+  type,
+  email,
+  password,
+  navigate,
+  isLoading,
+}) {
   return async dispatch => {
     try {
+      if (isLoading === true)
+        throw new Error('Please wait, previous request processing...')
+      dispatch(authSlice.actions.setLoading({ isLoading: true }))
       let userCredentials
       switch (type) {
         case 'SIGNUP':
@@ -63,7 +75,7 @@ export const submit = function ({ type, email, password, navigate }) {
           console.log(userCredentials)
           break
         case 'GITHUB':
-          userCredentials = await signInWithPopup(auth, twitterProvider)
+          userCredentials = await signInWithPopup(auth, githubProvider)
           break
         case 'TWITTER':
           userCredentials = await signInWithPopup(auth, twitterProvider)
@@ -85,6 +97,8 @@ export const submit = function ({ type, email, password, navigate }) {
           error: err.message,
         })
       )
+    } finally {
+      dispatch(authSlice.actions.setLoading({ isLoading: false }))
     }
   }
 }

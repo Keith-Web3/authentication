@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { signOut, deleteUser, linkWithPopup } from 'firebase/auth'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { ref, deleteObject } from 'firebase/storage'
@@ -22,14 +22,21 @@ import SocialProfiles from './Utils/SocialProfiles'
 import Button from './UI/Button'
 import Modal from './UI/Modal'
 import '../sass/settings.scss'
-import { useState } from 'react'
 
 function Settings() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false)
+  const isLoading = useSelector(state => state.isLoading)
 
   const deleteAccount = async function () {
+    if (isLoading === true) {
+      dispatch(
+        actions.resetErrorMessage('Please wait, previous request processing...')
+      )
+      return
+    }
+    dispatch(actions.setLoading({ isLoading: true }))
     deleteDoc(doc(database, 'profiles', auth.currentUser.uid))
       .then(res => '')
       .catch(err => err)
@@ -37,10 +44,14 @@ function Settings() {
       .then(res => res)
       .catch(err => err)
     try {
+      if (isLoading === true)
+        throw new Error('Please wait, previous request processing...')
       const res = await deleteUser(auth.currentUser)
       navigate('/login')
     } catch (err) {
       dispatch(actions.resetErrorMessage(err.message))
+    } finally {
+      dispatch(actions.setLoading({ isLoading: false }))
     }
   }
 

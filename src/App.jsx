@@ -44,19 +44,19 @@ function App() {
     <AnimatePresence>
       {errMessage && <Popup key={nanoid()} message={errMessage} />}
       <Routes>
-          <Route path="/" element={<Navigate to="/profile" />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          {isLoggedIn && (
-            <>
-              <Route path="/profile" element={<Profile />}>
-                <Route path="/profile" element={<MainProfile />} />
-                <Route path="/profile/edit" element={<EditProfile />} />
-              </Route>
-              <Route path="/settings" element={<Settings />} />
-            </>
-          )}
-          <Route path="*" element={<Navigate to="/signup" />} />
+        <Route path="/" element={<Navigate to="/profile" />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        {isLoggedIn && (
+          <>
+            <Route path="/profile" element={<Profile />}>
+              <Route path="/profile" element={<MainProfile />} />
+              <Route path="/profile/edit" element={<EditProfile />} />
+            </Route>
+            <Route path="/settings" element={<Settings />} />
+          </>
+        )}
+        <Route path="*" element={<Navigate to="/signup" />} />
       </Routes>
     </AnimatePresence>
   )

@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
-import { useDispatch } from 'react-redux'
-import { actions, submit } from '../store/AuthState'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
+import { submit } from '../store/AuthState'
 import emailImg from '../../assets/envelope-solid.svg'
 import passwordImg from '../../assets/lock-solid.svg'
 import logo from '../../assets/devchallenges-light.svg'
@@ -17,6 +17,8 @@ function FormTemplate({ children, button, footer, type }) {
   const emailRef = useRef()
   const passwordRef = useRef()
   const navigate = useNavigate()
+  const isLoading = useSelector(state => state.isLoading)
+  console.log(isLoading)
 
   const submitHandler = function (type) {
     return function (e) {
@@ -28,6 +30,7 @@ function FormTemplate({ children, button, footer, type }) {
           email: emailRef.current.value,
           password: passwordRef.current.value,
           navigate,
+          isLoading,
         })
       )
     }
