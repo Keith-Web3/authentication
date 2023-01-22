@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { ref, deleteObject } from 'firebase/storage'
+import { motion } from 'framer-motion'
 
 import { actions } from './store/AuthState'
 import {
@@ -37,10 +38,11 @@ function Settings() {
       return
     }
     dispatch(actions.setLoading({ isLoading: true }))
-    deleteDoc(doc(database, 'profiles', auth.currentUser.uid))
-      .then(res => '')
-      .catch(err => err)
-    deleteObject(ref(storage, `images/${auth.currentUser.uid}`))
+    const userId = auth.currentUser.uid
+    deleteDoc(doc(database, 'profiles', userId))
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    deleteObject(ref(storage, `images/${userId}`))
       .then(res => res)
       .catch(err => err)
     try {
@@ -67,7 +69,12 @@ function Settings() {
   }
 
   return (
-    <div className="settings">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="settings"
+    >
       <img src={logo} alt="logo" />
       <div className="back-btn" onClick={() => navigate(-1)}>
         <img src={backImg} alt="back" />
@@ -103,7 +110,7 @@ function Settings() {
           </Modal>,
           document.getElementById('root')
         )}
-    </div>
+    </motion.div>
   )
 }
 

@@ -1,7 +1,13 @@
 import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+import {
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { onAuthStateChanged } from 'firebase/auth'
 
@@ -22,6 +28,7 @@ function App() {
   const isLoggedIn = useSelector(state => state.isLoggedIn)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
     onAuthStateChanged(auth, user => {
@@ -41,9 +48,9 @@ function App() {
   }, [errMessage])
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {errMessage && <Popup key={nanoid()} message={errMessage} />}
-      <Routes>
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Navigate to="/profile" />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />

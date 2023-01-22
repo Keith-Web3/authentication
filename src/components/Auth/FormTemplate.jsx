@@ -41,8 +41,8 @@ function FormTemplate({ children, button, footer, type }) {
       onSubmit={submitHandler(type)}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ type: 'tween', duration: 1 }}
-      exit={{ x: '-100vw' }}
+      // transition={{ type: 'tween', duration: 1 }}
+      exit={{ opacity: 0 }}
     >
       <img src={logo} alt="logo" />
       {children}

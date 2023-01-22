@@ -13,11 +13,7 @@ function Profile() {
   const navigate = useNavigate()
 
   return (
-    <motion.div
-      className="profile"
-      transition={{ type: 'tween', duration: 1.5 }}
-      exit={{ opacity: 0, x: '-100vw' }}
-    >
+    <motion.div className="profile">
       <div className="container">
         <header>
           <img src={logo} alt="logo" />
