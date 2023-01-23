@@ -1,4 +1,4 @@
-# Read Me Template
+# Authentication
 
 ![Project Image](<./public/Screenshot%20(60).png>)
 
