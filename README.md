@@ -10,7 +10,6 @@ You're sections headers will be used to reference location of destination.
 
 - [Description](#description)
 - [How To Use](#how-to-use)
-- [References](#references)
 - [License](#license)
 - [Author Info](#author-info)
 
@@ -35,30 +34,14 @@ An authentication site which utilizes firebase-firestore, firebase-storage, fire
 #### Installation
 
 ```html
-<p>npm install</p>
+npm install
 ```
 
 To start the server,
 
 ```html
-<p>npm run dev</p>
+npm run dev
 ```
-
-#### API Reference
-
-```html
-<p>dummy code</p>
-```
-
-[Back To The Top](#read-me-template)
-
----
-
-## References
-
-[Back To The Top](#read-me-template)
-
----
 
 ## License
 
