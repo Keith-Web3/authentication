@@ -18,7 +18,7 @@ You're sections headers will be used to reference location of destination.
 
 ## Description
 
-Creating ReadMe's for your Github repository can be tedious. I hope this template can save you time and effort as well as provide you with some consistency across your projects.
+An authentication site which utilizes firebase-firestore, firebase-storage, firebase-auth. This can be added as an authentication form to other projects.
 
 #### Technologies
 
