@@ -34,6 +34,16 @@ Creating ReadMe's for your Github repository can be tedious. I hope this templat
 
 #### Installation
 
+```html
+<p>npm install</p>
+```
+
+To start the server,
+
+```html
+<p>npm run dev</p>
+```
+
 #### API Reference
 
 ```html
