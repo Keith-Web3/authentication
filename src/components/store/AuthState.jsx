@@ -1,4 +1,5 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
+import thunk from 'redux-thunk'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -106,4 +107,5 @@ export const submit = function ({
 export const actions = authSlice.actions
 export const store = configureStore({
   reducer: authSlice.reducer,
+  middleware: [thunk],
 })

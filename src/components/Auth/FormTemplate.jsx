@@ -18,7 +18,6 @@ function FormTemplate({ children, button, footer, type }) {
   const passwordRef = useRef()
   const navigate = useNavigate()
   const isLoading = useSelector(state => state.isLoading)
-  console.log(isLoading)
 
   const submitHandler = function (type) {
     return function (e) {
